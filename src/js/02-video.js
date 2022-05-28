@@ -30,4 +30,17 @@ const currentTimeTracker = function (data) {
 
 player.on('timeupdate', _.throttle(currentTimeTracker, 1000));
 
-player.setCurrentTime(storage.getItem('videoplayer-current-time'));
+player
+  .setCurrentTime(storage.getItem('videoplayer-current-time'))
+  .then(seconds => {
+    return seconds;
+  })
+  .catch(function (error) {
+    switch (error.name) {
+      case 'RangeError':
+        break;
+
+      default:
+        break;
+    }
+  });
